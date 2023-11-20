@@ -8,7 +8,9 @@ LOCAL_PATH := $(MY_LOCAL_PATH)
 include $(CLEAR_VARS)
 LOCAL_MODULE    := moonlight-core
 
-LOCAL_SRC_FILES := moonlight-common-c/src/AudioStream.c \
+LOCAL_SRC_FILES := moonlight-common-c/scream/ScreamRx.cpp \
+                   moonlight-common-c/scream/ScreamWrapper.cpp \
+                   moonlight-common-c/src/AudioStream.c \
                    moonlight-common-c/src/ByteBuffer.c \
                    moonlight-common-c/src/Connection.c \
                    moonlight-common-c/src/ConnectionTester.c \
@@ -46,8 +48,10 @@ LOCAL_SRC_FILES := moonlight-common-c/src/AudioStream.c \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/moonlight-common-c/enet/include \
                     $(LOCAL_PATH)/moonlight-common-c/reedsolomon \
                     $(LOCAL_PATH)/moonlight-common-c/src \
+                    $(LOCAL_PATH)/moonlight-common-c/scream \
 
-LOCAL_CFLAGS := -DHAS_SOCKLEN_T=1 -DLC_ANDROID -DHAVE_CLOCK_GETTIME=1
+APP_STL := c++_static
+LOCAL_CFLAGS := -DHAS_SOCKLEN_T=1 -DLC_ANDROID -DHAVE_CLOCK_GETTIME=1 -DANDROID_STL=c++_shared
 
 ifeq ($(NDK_DEBUG),1)
 LOCAL_CFLAGS += -DLC_DEBUG
